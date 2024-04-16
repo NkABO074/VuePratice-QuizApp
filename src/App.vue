@@ -1,16 +1,19 @@
 <script setup>
 import q from "./data/data.json";
-import {ref, watch} from "vue";
-import Card from "./components/Card.vue"
+import { ref, watch } from "vue";
+
+// importation of a component
+import Card from "./components/Card.vue";
 
 const quizes = ref(q);
 const search = ref("");
 
 // watch:Watch any variation in the state.
 watch(search, () => {
-  quizes.value = q.filter(quiz => quiz.name.toLowerCase().includes(search.value.toLowerCase()));
+  quizes.value = q.filter((quiz) =>
+    quiz.name.toLowerCase().includes(search.value.toLowerCase())
+  );
 });
-
 </script>
 
 <template>
@@ -20,17 +23,8 @@ watch(search, () => {
       <input v-model.trim="search" type="text" placeholder="Search..." />
     </header>
     <div class="options-container">
-      <Card v-for="quiz in quizes" :key="quiz.id" />
-      <!-- <div  class="card">
-        <img
-          :src=quiz.img
-          alt=""
-        />
-        <div class="card-text">
-          <h2>{{ quiz.name }}</h2>
-          <p>{{ quiz.questions.length }} questions</p>
-        </div>
-      </div> -->
+      <!-- the Card.vue component -->
+      <Card v-for="quiz in quizes" :key="quiz.id" :quiz="quiz" />
     </div>
   </div>
 </template>
@@ -65,5 +59,4 @@ header input {
   flex-wrap: wrap;
   margin-top: 40px;
 }
-
 </style>
