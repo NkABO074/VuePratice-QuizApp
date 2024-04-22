@@ -24,7 +24,8 @@ watch(search, () => {
     </header>
     <div class="options-container">
       <!-- the Card.vue component -->
-      <Card v-for="quiz in quizes" :key="quiz.id" :quiz="quiz" />
+      
+      <Card v-for="quiz in quizes" :key="quiz.id" :quiz="quiz"/>
     </div>
   </div>
 </template>

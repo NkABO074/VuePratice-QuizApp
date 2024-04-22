@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps } from "vue";
-
+import { RouterLink } from "vue-router";
 // Object destructuration
 const { quiz } = defineProps(["quiz"]);
 </script>
@@ -9,7 +9,7 @@ const { quiz } = defineProps(["quiz"]);
   <div class="card">
     <img :src="quiz.img" alt="" />
     <div class="card-text">
-      <h2>{{ quiz.name }}</h2>
+        <h2>{{ quiz.name }}</h2>
       <p>{{ quiz.questions.length }} questions</p>
     </div>
   </div>
