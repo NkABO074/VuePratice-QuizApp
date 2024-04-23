@@ -1,83 +1,31 @@
-<script setup></script>
+<script setup>
+import Question from "../components/Question.vue";
+import QuizHeader from "../components/QuizHeader.vue";
+import { useRoute } from "vue-router";
+import { ref, watch } from "vue";
+import quizes from "../data/data.json";
+
+const route = useRoute(); // fetch information on the current route
+const quizId = parseInt(route.params.id);
+
+const currentQuestionIndex = ref(0);
+
+const quiz = quizes.find((q) => q.id === quizId);
+
+const questionStatus = ref(`${currentQuestionIndex.value}/${quiz.questions.length}`);
+
+// use it everytime a piece of state change
+watch(() => currentQuestionIndex.value, () => {
+  questionStatus.value = `${currentQuestionIndex.value}/${quiz.questions.length}`;
+})
+</script>
 
 <template>
   <div>
-    <header>
-      <h4>Question 1/3</h4>
-      <div class="bar">
-        <div class="completion"> </div>
-      </div>
-      <div>
-        <div class="question-containner">
-          <h1 class="question"> What is Lorem Ipsum?</h1>
-        </div>
-        <div class="options-container">
-          <div class="option">
-            <p class="option-label">A</p>
-            <div class="option-value">
-              <p>A place holder text</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
+    <QuizHeader :questionStatus="questionStatus" />
+    <div>
+      <Question :question="quiz.questions[currentQuestionIndex]" />
+      <button @click="currentQuestionIndex++">Next Question</button>
+    </div>
   </div>
 </template>
-
-<style scoped>
-header {
-  margin:20px;
-}
-
-header h4 {
-  font-size: 30px;
-}
-
-.bar {
-  width: 300px;
-  height: 50px;
-  border: 3px solid bisque;
-}
-
-.completion {
-  height: 100%;
-  width: 0%;
-  background-color: bisque;
-}
-
-.question-containner {
-  margin-top: 20px;
-
-}
-
-.question {
-  font-size: 40px;
-  margin-bottom: 20px;
-}
-
-.option {
-  display: flex;
-  margin-bottom: 20px;
-  cursor: pointer;
-}
-
-.option-label {
-  background-color: bisque;
-  width: 50px;
-  height: 50px;
-  font-size: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color:black;
-  font-weight: 700;
-}
-
-.option-value {
-  background-color: rgb(244 239 239);
-  width:100%;
-  font-size: 30px;
-  padding: 0 20px;
-  color:black;
-}
-</style>
