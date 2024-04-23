@@ -1,12 +1,21 @@
 <script setup>
 import { defineProps } from "vue";
-import { RouterLink } from "vue-router";
+import { RouterLink, useRouter } from "vue-router";
 // Object destructuration
 const { quiz } = defineProps(["quiz"]);
+
+const router = useRouter();
+
+/**
+ * Get to the correct quiz location based on the id
+ */
+const navigationToQuiz = () => {
+  router.push(`/quiz/${quiz.id}`)
+}
 </script>
 
 <template>
-  <div class="card">
+  <div class="card" @click="navigationToQuiz">
     <img :src="quiz.img" alt="" />
     <div class="card-text">
         <h2>{{ quiz.name }}</h2>
