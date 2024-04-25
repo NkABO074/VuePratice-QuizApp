@@ -11,7 +11,7 @@ const {quizQuestionLength, numberOfCorrectAnswer} = defineProps(["quizQuestionLe
     <h1>
       {{ numberOfCorrectAnswer }}/{{ quizQuestionLength }}
     </h1>
-    <RouterLink>
+    <RouterLink to="/" class="button">
       Go back
     </RouterLink>
   </div>
