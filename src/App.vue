@@ -8,8 +8,5 @@ import { RouterView } from "vue-router";
 </template>
 
 <style scope>
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-}
+
 </style>
